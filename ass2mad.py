@@ -89,14 +89,25 @@ def e(n):
     return e0
 
 print("1.5 | e1000 mod 999 =", e(1000))
-#2.7
-def s_iter(n):
-    s0, s1 = 1, 2  
-    for _ in range(2, n + 1):
-        s0, s1 = s1, (6 * s1 - 2 * s0) % 999
-    return s1
+#2
+MOD = 9901
 
-print("2.7 | (a1000 + b1000) mod 999 =", s_iter(1000))
+def coeffs_iterative(n):
+    a, b, c, d = 1, 0, 0, 0  
+    for _ in range(n):
+        na = 2*b - 15*c
+        nb = a - 15*d
+        nc = -5*a + 2*d
+        nd = -5*b + c
+        a, b, c, d = na % MOD, nb % MOD, nc % MOD, nd % MOD
+    return a, b, c, d
+
+a, b, c, d = coeffs_iterative(1000)
+S = (a + b + c + d) % MOD
+print("2 | (a1000 + b1000 + c1000 + d1000) mod 9901=" ,S)  
+
+
+
 
 
 
